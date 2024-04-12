@@ -16,6 +16,7 @@ public class HttpRequestParser {
     private HttpRequestParser() {
         throw new IllegalStateException("Utility class");
     }
+
     public static HttpRequestHeader parseHeaders(List<String> headerString) {
         HashMap<String, String> headers = new HashMap<>();
 
@@ -29,13 +30,12 @@ public class HttpRequestParser {
 
     public static Map<String, String> parseQueryParams(String queryString) {
         Map<String, String> queryParams = new HashMap<>();
-        String[] splitParams = queryString.split("\\&");
+        String[] splitParams = queryString.split("&");
 
         for (String splitParam : splitParams) {
             String[] splitParamElements = splitParam.split("=");
             String key = splitParamElements[0];
             String value = splitParamElements.length < 2 ? "" : splitParamElements[1];
-
             queryParams.put(key, value);
         }
 
