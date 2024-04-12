@@ -57,6 +57,9 @@ public class RequestHandler implements Runnable {
         Map<String, String> responseHeader = new HashMap<>();
 
         String requestUri = request.getRequestUri();
+        if ("/".equals(requestUri)) {
+            requestUri = "/index.html";
+        }
         String extension = HttpRequestParser.parseExt(requestUri);
 
         String pathPrefix = "html".equals(extension) ? "./templates" : "./static";
