@@ -10,13 +10,18 @@ import java.util.List;
 import java.util.Map;
 
 public class HttpRequestParser {
+    private static final int HEADER_NAME_INDEX = 0;
+    private static final int HEADER_VALUE_INDEX = 1;
 
+    private HttpRequestParser() {
+        throw new IllegalStateException("Utility class");
+    }
     public static HttpRequestHeader parseHeaders(List<String> headerString) {
         HashMap<String, String> headers = new HashMap<>();
 
         for (String headerLine : headerString) {
             String[] splitHeader = headerLine.split(": ");
-            headers.put(splitHeader[0], splitHeader[1]);
+            headers.put(splitHeader[HEADER_NAME_INDEX], splitHeader[HEADER_VALUE_INDEX]);
         }
 
         return new HttpRequestHeader(headers);
