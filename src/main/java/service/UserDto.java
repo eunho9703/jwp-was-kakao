@@ -23,7 +23,7 @@ public class UserDto {
     }
 
     private void validateString(String input) {
-        if (input.isBlank() || input.isEmpty()) {
+        if (input == null |input.isBlank() || input.isEmpty()) {
             throw new IllegalArgumentException("[ERROR] input validation failed");
         }
     }
