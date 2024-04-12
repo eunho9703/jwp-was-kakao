@@ -68,7 +68,7 @@ public class RequestHandler implements Runnable {
 
         if ("/user/create".equals(request.getRequestUri())) {
             String body = request.getBody();
-            Map<String, String> params = HttpRequestParser.parseUrlEncodedString(body);
+            Map<String, String> params = HttpRequestParser.parseQueryParams(body);
 
             UserDto userDto = new UserDto(
                     params.getOrDefault("userId", ""),

@@ -22,7 +22,7 @@ public class HttpRequestParser {
         return new HttpRequestHeader(headers);
     }
 
-    public static Map<String, String> parseUrlEncodedString(String queryString) {
+    public static Map<String, String> parseQueryParams(String queryString) {
         Map<String, String> queryParams = new HashMap<>();
         String[] splitParams = queryString.split("\\&");
 

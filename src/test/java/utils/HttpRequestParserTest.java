@@ -44,7 +44,7 @@ public class HttpRequestParserTest {
         String urlEncodedString = "userId=cu&password=password&name=이동규&email=brainbackdoor@gmail.com";
 
         //when
-        Map<String, String> queryParams = HttpRequestParser.parseUrlEncodedString(urlEncodedString);
+        Map<String, String> queryParams = HttpRequestParser.parseQueryParams(urlEncodedString);
 
         //then
         Assertions.assertThat(queryParams.get("userId")).isEqualTo("cu");

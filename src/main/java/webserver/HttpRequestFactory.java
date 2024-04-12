@@ -15,7 +15,7 @@ public class HttpRequestFactory {
         RequestLine requestLine = HttpRequestParser.parseRequestLine(reader.readLine());
 
         String queryString = requestLine.getQueryString();
-        Map<String, String> queryParams = HttpRequestParser.parseUrlEncodedString(queryString);
+        Map<String, String> queryParams = HttpRequestParser.parseQueryParams(queryString);
 
         HttpRequestHeader header = HttpRequestParser.parseHeaders(getHeaderLines(reader));
 
