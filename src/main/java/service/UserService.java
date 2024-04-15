@@ -9,12 +9,6 @@ import java.io.DataOutputStream;
 import java.util.Map;
 
 public class UserService {
-
-    public void processRequest(HttpRequest request, DataOutputStream dos) {
-        if ("/user/create".equals(request.getRequestUri())) {
-            createUser(request, dos);
-        }
-    }
     public User save(UserDto userDto) {
         User user = new User(userDto.getUserId(),
                 userDto.getPassword(),
