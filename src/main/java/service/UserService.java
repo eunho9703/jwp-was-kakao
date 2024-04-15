@@ -19,7 +19,7 @@ public class UserService {
         return user;
     }
 
-    private void createUser(HttpRequest request, DataOutputStream dos) {
+    public void createUser(HttpRequest request) {
         String body = request.getBody();
         Map<String, String> params = HttpRequestParser.parseQueryParams(body);
 
