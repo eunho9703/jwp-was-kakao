@@ -74,12 +74,14 @@ public class RequestHandler implements Runnable {
     }
 
     private void doPost(HttpRequest request, DataOutputStream dos) {
-        UserService service = new UserService();
-        service.processRequest(request, dos);
+        HttpRequestFactory httpRequestFactory = new HttpRequestFactory();
+        httpRequestFactory.processRequest(request);
 
         String host = request.getHeader().getHost();
         Map<String, String> responseHeader = new HashMap<>();
-        responseHeader.put("Location", "http://" + host + "/index.html");
+        if ("/user/create".equals(request.getRequestUri())) {
+            responseHeader.put("Location", "http://" + host + "/index.html");
+        }
         HttpResponse response = new HttpResponse("HTTP/1.1", 302, "FOUND",
                 responseHeader, "".getBytes());
         sendResponse(dos, response);
