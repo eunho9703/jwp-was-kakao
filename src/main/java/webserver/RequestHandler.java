@@ -42,12 +42,6 @@ public class RequestHandler implements Runnable {
 
         } catch (Exception e) {
             logger.error(e.getMessage());
-        } finally {
-            try {
-                connection.close();
-            } catch (IOException e) {
-                logger.error("Error while closing socket: " + e.getMessage());
-            }
         }
     }
 
