@@ -66,8 +66,8 @@ public class RequestHandler implements Runnable {
     }
 
     private void doPost(HttpRequest request, DataOutputStream dos) {
-        HttpRequestFactory httpRequestFactory = new HttpRequestFactory();
-        httpRequestFactory.processRequest(request);
+        RequestMapper requestMapper = new RequestMapper();
+        HttpResponse response = requestMapper.processRequest(request);
 
         String host = request.getHeader().getHost();
         Map<String, String> responseHeader = new HashMap<>();
