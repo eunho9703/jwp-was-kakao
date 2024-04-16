@@ -69,13 +69,6 @@ public class RequestHandler implements Runnable {
         RequestMapper requestMapper = new RequestMapper();
         HttpResponse response = requestMapper.processRequest(request);
 
-        String host = request.getHeader().getHost();
-        Map<String, String> responseHeader = new HashMap<>();
-        if ("/user/create".equals(request.getRequestUri())) {
-            responseHeader.put("Location", "http://" + host + "/index.html");
-        }
-        HttpResponse response = new HttpResponse("HTTP/1.1", 302, "FOUND",
-                responseHeader, "".getBytes());
         sendResponse(dos, response);
 
     }

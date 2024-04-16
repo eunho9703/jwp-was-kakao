@@ -4,8 +4,9 @@ import db.DataBase;
 import model.User;
 import utils.HttpRequestParser;
 import webserver.HttpRequest;
+import webserver.HttpResponse;
 
-import java.io.DataOutputStream;
+import java.util.HashMap;
 import java.util.Map;
 
 public class UserService {
@@ -31,5 +32,15 @@ public class UserService {
         );
         UserService service = new UserService();
         service.save(userDto);
+    }
+
+    public HttpResponse performHttpRedirect(HttpRequest request) {
+        String host = request.getHeader().getHost();
+        Map<String, String> responseHeader = new HashMap<>();
+        responseHeader.put("Location", "http://" + host + "/index.html");
+
+        HttpResponse response = new HttpResponse("HTTP/1.1", 302, "FOUND",
+                responseHeader, "".getBytes());
+        return response;
     }
 }
