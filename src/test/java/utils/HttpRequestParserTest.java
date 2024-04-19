@@ -4,8 +4,8 @@ import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
-import webserver.HttpRequestHeader;
-import webserver.RequestLine;
+import webserver.http.request.HttpRequestHeader;
+import webserver.http.request.RequestLine;
 
 import java.util.ArrayList;
 import java.util.List;

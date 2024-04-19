@@ -1,7 +1,7 @@
 package utils;
 
-import webserver.HttpRequestHeader;
-import webserver.RequestLine;
+import webserver.http.request.HttpRequestHeader;
+import webserver.http.request.RequestLine;
 
 import java.net.URLDecoder;
 import java.nio.charset.StandardCharsets;

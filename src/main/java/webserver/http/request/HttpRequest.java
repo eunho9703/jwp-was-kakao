@@ -1,4 +1,4 @@
-package webserver;
+package webserver.http.request;
 
 import java.util.Map;
 
@@ -16,20 +16,12 @@ public class HttpRequest {
         this.queryParams = queryParams;
     }
 
-    public RequestLine getRequestLine() {
-        return requestLine;
-    }
-
     public String getMethod() {
         return requestLine.getMethod();
     }
 
     public String getRequestUri() {
         return requestLine.getRequestUri();
-    }
-
-    public Map<String, String> getQueryParams() {
-        return queryParams;
     }
 
     public HttpRequestHeader getHeader() {
@@ -39,4 +31,5 @@ public class HttpRequest {
     public String getBody() {
         return body;
     }
+
 }

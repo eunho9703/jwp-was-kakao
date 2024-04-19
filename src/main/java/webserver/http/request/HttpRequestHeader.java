@@ -1,4 +1,4 @@
-package webserver;
+package webserver.http.request;
 
 import java.util.Map;
 
@@ -23,5 +23,9 @@ public class HttpRequestHeader {
 
     public String getAccept() {
         return headers.get("Accept");
+    }
+
+    public String getCookie() {
+        return headers.getOrDefault("Cookie", "");
     }
 }

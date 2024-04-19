@@ -3,14 +3,17 @@ package service;
 import db.DataBase;
 import model.User;
 import utils.HttpRequestParser;
-import webserver.HttpRequest;
-import webserver.HttpResponse;
+import webserver.http.request.HttpRequest;
+import webserver.http.HttpResponse;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
+
+import static service.UserListHandler.isUserLoggedIn;
 
 public class UserService {
-    public User save(UserDto userDto) {
+    public User saveUser(UserDto userDto) {
         User user = new User(userDto.getUserId(),
                 userDto.getPassword(),
                 userDto.getName(),
@@ -30,17 +33,42 @@ public class UserService {
                 params.getOrDefault("name", ""),
                 params.getOrDefault("email", "")
         );
-        UserService service = new UserService();
-        service.save(userDto);
+        saveUser(userDto);
     }
 
-    public HttpResponse performHttpRedirect(HttpRequest request) {
-        String host = request.getHeader().getHost();
-        Map<String, String> responseHeader = new HashMap<>();
-        responseHeader.put("Location", "http://" + host + "/index.html");
+    public boolean isValidUser(HttpRequest request) {
+        String body = request.getBody();
+        Map<String, String> params = HttpRequestParser.parseQueryParams(body);
+        String userId = params.get("userId");
+        String password = params.get("password");
 
-        HttpResponse response = new HttpResponse("HTTP/1.1", 302, "FOUND",
-                responseHeader, "".getBytes());
-        return response;
+        return Optional.ofNullable(DataBase.findUserById(userId))
+                .map(User::getPassword)
+                .filter(password::equals)
+                .isPresent();
+    }
+
+    public static HttpResponse handleUserLogin(HttpRequest request) {
+        System.out.println(isUserLoggedIn(request));
+        return isUserLoggedIn(request) ?
+                performHttpRedirect(request, new HashMap<>(), "/index.html") :
+                performLogin(request);
+    }
+
+    public static HttpResponse performHttpRedirect(HttpRequest request, Map<String, String> responseHeader, String location) {
+        responseHeader.put("Location", "http://" + request.getHeader().getHost() + location);
+        return createRedirectResponse(responseHeader);
+    }
+
+    private static HttpResponse createRedirectResponse(Map<String, String> headers) {
+        return new HttpResponse("HTTP/1.1", 302, "FOUND", headers, new byte[0]);
+    }
+
+    public HttpResponse performLoginFailure(HttpRequest request) {
+        return performHttpRedirect(request, new HashMap<>(), "/user/login_failed.html");
+    }
+
+    public static HttpResponse performLogin(HttpRequest request) {
+        return performHttpRedirect(request, new HashMap<>(), "/user/login.html");
     }
 }

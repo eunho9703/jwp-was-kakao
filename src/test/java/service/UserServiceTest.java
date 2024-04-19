@@ -19,7 +19,7 @@ public class UserServiceTest {
         UserDto userDto = new UserDto(userId, password, name, email);
 
         //when
-        User user = service.save(userDto);
+        User user = service.saveUser(userDto);
 
         //then
         Assertions.assertThat(DataBase.findUserById(userId)).isEqualTo(user);
