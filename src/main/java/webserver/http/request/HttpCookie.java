@@ -49,7 +49,6 @@ public class HttpCookie {
                 HttpResponse response = resolveGetResponse(request, requestUri);
                 sendResponse(dos, response);
             } catch (IOException | URISyntaxException e) {
-                System.out.println("Error!");
                 logger.error("Error occurred while handling GET request: {}", e.getMessage());
             }
         }
@@ -63,12 +62,8 @@ public class HttpCookie {
             switch (requestUri) {
                 case "/user/list":
                 case "/user/list.html":
-                    System.out.println(request.getHeader());
-                    System.out.println(request.getBody());
-                    System.out.println("here");
                     return handleUserList(request);
                 case "/user/login":
-                    //System.out.println("here");
                     return handleUserLogin(request);
                 default:
                     return handleDefaultGetRequest(requestUri);

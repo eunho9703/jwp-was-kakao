@@ -16,7 +16,7 @@ public class RequestHandler implements Runnable {
         this.connection = connectionSocket;
     }
 
-        public void run() {
+    public void run() {
         logger.debug("New Client Connect! Connected IP : {}, Port : {}", connection.getInetAddress(),
                 connection.getPort());
 
@@ -39,6 +39,7 @@ public class RequestHandler implements Runnable {
             logger.error(e.getMessage());
         }
     }
+
     private void handleGetRequest(HttpRequest request, DataOutputStream dos) {
         HttpCookie.RequestHandlerUtils.doGet(request, dos);
     }
